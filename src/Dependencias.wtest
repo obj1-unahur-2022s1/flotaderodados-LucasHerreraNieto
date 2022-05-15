@@ -1,0 +1,72 @@
+import dependencias.*
+import rodados.*
+
+describe  "Dependencias" {
+
+	var deporte = new Dependencia(empleados = 45 )
+	var cultura = new Dependencia(empleados = 31)
+	var cachito = new Corsa(color = "rojo")
+	method initialize(){
+		deporte.agregarALaFlota(cachito)
+		deporte.agregarALaFlota(new Corsa(color = "azul"))
+		deporte.agregarALaFlota(new Corsa(color = "verde"))
+		deporte.agregarALaFlota(new Kwid(tanqueAdicional = true))
+		deporte.agregarALaFlota(new AutoEspecial(capacidad = 5, velocidadMaxima = 160, peso = 1200, color = "beige"))
+	
+		cultura.agregarALaFlota(new Kwid(tanqueAdicional = true))
+		cultura.agregarALaFlota(new Kwid(tanqueAdicional = true))
+		cultura.agregarALaFlota(new Kwid())
+		cultura.agregarALaFlota(cachito)
+		trafic.motor(bataton)
+		trafic.interior(popular)
+		cultura.agregarALaFlota(trafic)
+	}
+	
+	test "peso total de la dependecia deporte"{
+		assert.equals(1300*3+1200+150+1200,deporte.pesoTotalFlota())
+	}
+	
+	test "peso total de la dependencia cultura"{
+		assert.equals(1300+1200*3+300+4000+1000+500,cultura.pesoTotalFlota())
+	}
+	
+	test "esta bien equipada deporte"{
+		assert.that(deporte.estaBienEquipada())
+	}
+	
+	test "esta bien equipada cultura"{
+		assert.notThat(cultura.estaBienEquipada())
+	}
+	
+	test "capacidad total en clolor azul deporte"{
+		assert.equals(4+3,deporte.capacidadTotalEnColor("azul"))
+	}
+	
+	test "capacidad total en color azul cultura"{
+		assert.equals(3+3+4,cultura.capacidadTotalEnColor("azul"))
+	}
+	
+	test "color de rodado mas rapido deporte"{
+		assert.equals("beige",deporte.colorDelRodadoMasRapido())
+	}
+	
+	test "color de rodado mas rapido cultura"{
+		assert.equals("rojo",cultura.colorDelRodadoMasRapido())
+	}
+	
+	test "es grande deporte"{
+		assert.that(deporte.esGrande())
+	}
+	
+	test "es grande cultura"{
+		assert.notThat(cultura.esGrande())
+	}
+	
+	test "capacidad faltante deporte"{
+		assert.equals(25,deporte.capacidadFaltante())
+	}
+	
+	test "capacidad faltante cultura"{
+		assert.equals(5,cultura.capacidadFaltante())
+	}
+}
